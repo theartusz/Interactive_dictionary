@@ -7,8 +7,15 @@ data = json.load(open("data.json"))
 #check data.json for word and return definition 
 def find_word(word):
     word = word.lower()
+
     if word in data:
         return data[word]
+
+    elif word.title() in data:
+        return data[word.title()]
+
+    elif word.upper() in data:
+        return data[word.upper()]
 
     elif get_close_matches(word, data.keys()) != []: 
         #options are ordered based on closnes
@@ -25,6 +32,7 @@ def find_word(word):
         print("Word " + word + " is not in dictionary.")
 
 word = input("Enter the word you are looking for: ")
+
 output = find_word(word)
 
 if type(output) == list:
